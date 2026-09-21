@@ -1,5 +1,7 @@
 # DataPilot AI — Autonomous Data Analyst & Machine Learning Agent
 
+**Live demo:** [Open DataPilot AI](https://datapilot-ai-demo.onrender.com/analyst) · **Source:** [GitHub repository](https://github.com/sneha2003/datapilot-ai)
+
 DataPilot AI is a production-style internal analytics product that turns a high-level business or modeling objective into a traced, multi-step analytical workflow. A LangGraph supervisor plans and coordinates work; deterministic Python tools perform every calculation; MCP provides the tool boundary; PostgreSQL stores datasets, lineage, runs, experiments, artifacts, and memory.
 
 The model never invents statistics, executes generated Python, or pretends to train a model. It chooses tools and explains their returned evidence.
