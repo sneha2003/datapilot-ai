@@ -17,7 +17,7 @@ export default function Analyst(){
   const [query,setQuery]=useState(''); const [pendingQuestion,setPendingQuestion]=useState(''); const [session,setSession]=useState<string>(); const [selected,setSelected]=useState(params.get('dataset')||'');
   const [messages,setMessages]=useState<Message[]>([]); const [tab,setTab]=useState<Tab>('overview'); const [sourceSearch,setSourceSearch]=useState(''); const [progressIndex,setProgressIndex]=useState(0);
   const [uploading,setUploading]=useState(false); const [uploadError,setUploadError]=useState(''); const fileInput=useRef<HTMLInputElement>(null); const conversationEnd=useRef<HTMLDivElement>(null);
-  const datasets=useQuery({queryKey:['datasets'],queryFn:()=>api<Dataset[]>('/api/datasets')});
+  const datasets=useQuery({queryKey:['datasets'],queryFn:()=>api<Dataset[]>('/api/datasets'),refetchInterval:query=>query.state.data?.length?false:5000});
   const health=useQuery({queryKey:['health'],queryFn:()=>api<{database:string;storage:string}>('/api/system/health'),refetchInterval:15000,retry:1});
   useEffect(()=>{if(datasets.data?.length&&!datasets.data.some(item=>item.id===selected)){setSelected(datasets.data[0].id);setSession(undefined);setMessages([])}},[datasets.data,selected]);
   const dataset=datasets.data?.find(item=>item.id===selected);

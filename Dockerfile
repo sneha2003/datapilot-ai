@@ -15,4 +15,4 @@ COPY scripts ./scripts
 COPY data/metadata ./data/metadata
 COPY --from=frontend-build /frontend/dist ./frontend/dist
 RUN python scripts/download_datasets.py
-CMD ["sh", "-c", "python scripts/load_datasets.py --only-missing && exec uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+CMD ["sh", "-c", "exec uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]

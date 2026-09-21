@@ -1,4 +1,4 @@
-import io,json,math,re,uuid
+import io,json,math,os,re,threading,uuid
 from datetime import datetime,timezone
 from pathlib import Path
 import pandas as pd
@@ -25,6 +25,9 @@ app.add_middleware(CORSMiddleware,allow_origins=settings.cors_origin_list,allow_
 @app.on_event("startup")
 def startup():
     Base.metadata.create_all(engine); settings.artifact_root.mkdir(parents=True,exist_ok=True)
+    if os.getenv("AUTO_SEED_DATASETS")=="1":
+        from scripts.load_datasets import main as seed_public_datasets
+        threading.Thread(target=seed_public_datasets,kwargs={"only_missing":True},daemon=True,name="public-dataset-seed").start()
 
 def _json_safe(value):
     """Replace values that JSON cannot represent without changing valid results."""
