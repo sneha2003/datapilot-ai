@@ -1,0 +1,14 @@
+.env
+__pycache__/
+.pytest_cache/
+.venv/
+node_modules/
+dist/
+data/raw/*.csv
+artifacts/models/*.joblib
+artifacts/plots/*.json
+*.db
+*.dump
+*.tsbuildinfo
+artifacts/backups/
+backend/artifacts/

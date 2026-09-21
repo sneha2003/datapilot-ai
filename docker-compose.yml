@@ -1,0 +1,34 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: datapilot
+      POSTGRES_PASSWORD: datapilot
+      POSTGRES_DB: datapilot
+    ports:
+      - "5432:5432"
+    volumes:
+      - datapilot_postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U datapilot -d datapilot"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+  backend:
+    build: ./backend
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://datapilot:datapilot@postgres:5432/datapilot
+    volumes:
+      - ./artifacts:/app/artifacts
+      - ./data:/app/data
+    ports: ["8000:8000"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+  frontend:
+    build: ./frontend
+    ports: ["5173:80"]
+    depends_on: [backend]
+volumes:
+  datapilot_postgres:

@@ -1,0 +1,22 @@
+[
+  {"query":"What columns are available?","expected_tools":["get_schema"]},
+  {"query":"Tell me about this dataset.","expected_tools":["dataset_overview"]},
+  {"query":"Analyze this dataset and show the most important findings.","expected_tools":["business_insights"]},
+  {"query":"Give me some important patterns that I need to notice.","expected_tools":["business_insights"],"context":{"target":"median_house_value","dataset_name":"california_housing"}},
+  {"query":"Revenue is growing but profit isn't improving. Explain why and recommend actions.","expected_tools":["business_insights"],"context":{"dataset_name":"uploaded_sales"}},
+  {"query":"What are the most important KPIs?","expected_tools":["business_insights"],"context":{"dataset_name":"uploaded_sales"}},
+  {"query":"How is revenue performing over time?","expected_tools":["business_insights"],"context":{"dataset_name":"uploaded_sales"}},
+  {"query":"Which products are performing best and worst?","expected_tools":["business_insights"],"context":{"dataset_name":"uploaded_sales"}},
+  {"query":"Revenue dropped last month. Why?","expected_tools":["business_insights"],"context":{"dataset_name":"uploaded_sales"}},
+  {"query":"Are discounts helping the business?","expected_tools":["business_insights"],"context":{"dataset_name":"uploaded_sales"}},
+  {"query":"Forecast revenue next month","expected_tools":["business_insights"],"context":{"dataset_name":"uploaded_sales"}},
+  {"query":"Show average sale price by product type as a chart","expected_tools":["grouped_analysis","visualize_last_result"],"context":{"dataset_name":"uploaded_sales","schema":{"columns":[{"name":"sale_price","type":"FLOAT"},{"name":"product_type","type":"TEXT"}]}}},
+  {"query":"Count records by store region","expected_tools":["grouped_analysis"],"context":{"dataset_name":"uploaded_sales","schema":{"columns":[{"name":"store_region","type":"TEXT"}]}}},
+  {"query":"Which customers are most likely to subscribe?","expected_tools":["target_drivers"]},
+  {"query":"Does this data need cleaning?","expected_tools":["profile_dataset","recommend_cleaning"]},
+  {"query":"Clean missing values.","expected_tools":["profile_dataset","recommend_cleaning","preview_cleaning","apply_cleaning"],"requires_approval":true},
+  {"query":"Which models should we try?","expected_tools":["profile_dataset","identify_problem","recommend_models"]},
+  {"query":"Train models to predict the outcome.","expected_tools":["profile_dataset","identify_problem","recommend_models","train_recommended"]},
+  {"query":"Which variables are most associated with the outcome?","expected_tools":["correlations"]},
+  {"query":"What model did we train previously?","expected_tools":["retrieve_memory"]}
+]
